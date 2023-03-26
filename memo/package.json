@@ -1,0 +1,17 @@
+{
+  "name": "memo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yamagata",
+  "license": "ISC",
+  "dependencies": {
+    "express": "*",
+    "grunt": "^1.6.1",
+    "nodemon": "^2.0.22",
+    "yargs": "^4.7.1"
+  }
+}
