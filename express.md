@@ -22,3 +22,17 @@ DELETE - 削除
 # routing
 パスごとに挙動を規定すること
 
+
+# middleware
+app.use(express.static())
+static
+静的ファイルのパスを指定する
+
+dynamic
+動的ファイル(ブラウザの挙動によって表示が変わる)
+
+
+# view engine
+webサイトの見た目を管理する仕組み
+ejs, pug, handlebars, hogan
+
