@@ -36,3 +36,20 @@ dynamic
 webサイトの見た目を管理する仕組み
 ejs, pug, handlebars, hogan
 
+# partials
+htmlコードをまとめる
+
+# helper
+関数処理をまとめる
+
+
+# middleware
+ブラウザからユーザーからのリクエストが発生し、サーバー側でレスポンスを返す間に行われる
+expressでの使用法
+例
+app.use() useはmiddlewareを登録するためのメソッド
+app.use((req, res, next) => {
+  req... リクエスト
+  res.. レスポンス
+  next...関数。middleware内の処理の終了を意味する。必須
+})

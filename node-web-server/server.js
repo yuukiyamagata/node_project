@@ -7,16 +7,33 @@ const PORT = 3000;
 app.set("view engine", "hbs");
 
 // ミドルウェア(middleware)
-// 静的ファイルの読み込み
-app.use(express.static(__dirname + "/public"));
-
+app.use(express.static(__dirname + "/public")); // 静的ファイルの読み込み
+app.use((req, res, next) => {
+  const now = new Date();
+  console.log(`リクエスト発生時刻: ${now}`);
+  next();
+})
+hbs.registerPartials(__dirname + "/views/partials");
+// partialsの利用
+hbs.registerHelper("getCurrentYear", () => {
+  // return new Date().getFullYear();
+  return "something";
+})
+hbs.registerHelper("uppercase", text => text.toUpperCase());
+// helper関数の作成
 
 app.get('/', (req, res) => {
-  res.send("<h1>Hello Express!</h1>");
+  res.render("home.hbs", {
+    pageTitle: "Home Page",
+    content: "当ホームページへようこそ!",
+  });
 });
 
 app.get('/about', (req, res) => {
-  res.render("about.hbs");
+  res.render("about.hbs", {
+    pageTitle: "About Page",
+    content: "コンテンツです",
+  });
   // viewsディレクトリにある場合に限り直接参照することができる
 });
 
