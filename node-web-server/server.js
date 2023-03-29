@@ -8,7 +8,8 @@ const PORT = 3000;
 app.set("view engine", "hbs");
 
 // ミドルウェア(middleware)
-app.use(express.static(__dirname + "/public")); // 静的ファイルの読み込み
+
+
 app.use((req, res, next) => {
   const now = new Date();
   const log = `リクエスト発生時刻: ${now}: ${req.method}, ${req.url}`;
@@ -18,6 +19,14 @@ app.use((req, res, next) => {
   });
   next();
 });
+
+app.use((req, res, next) => {
+  res.render("maintenance.hbs");
+  // ここであえてnext()を記載しないことにより、どのページでもメンテナンス中の
+  // ページが表示される
+});
+
+app.use(express.static(__dirname + "/public")); // 静的ファイルの読み込み
 
 hbs.registerPartials(__dirname + "/views/partials");
 // partialsの利用
