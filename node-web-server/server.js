@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const hbs = require("hbs");
+const fs = require("fs");
 
 const PORT = 3000;
 
@@ -10,15 +11,21 @@ app.set("view engine", "hbs");
 app.use(express.static(__dirname + "/public")); // 静的ファイルの読み込み
 app.use((req, res, next) => {
   const now = new Date();
-  console.log(`リクエスト発生時刻: ${now}`);
+  const log = `リクエスト発生時刻: ${now}: ${req.method}, ${req.url}`;
+  console.log(log);
+  fs.appendFile("server.log", log + "\n", (err) => {
+    err && console.log(err);
+  });
   next();
-})
+});
+
 hbs.registerPartials(__dirname + "/views/partials");
 // partialsの利用
 hbs.registerHelper("getCurrentYear", () => {
   // return new Date().getFullYear();
   return "something";
-})
+});
+
 hbs.registerHelper("uppercase", text => text.toUpperCase());
 // helper関数の作成
 
